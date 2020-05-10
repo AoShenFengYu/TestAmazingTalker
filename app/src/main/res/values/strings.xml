@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name" translatable="false">TestAmazingTalker</string>
+
+    <string name="title">Available times</string>
+    <string name="timezone_string">list in your timezone: %s (%s)</string>
+
+    <string name="sun" translatable="false">Sun</string>
+    <string name="mon" translatable="false">Mon</string>
+    <string name="tue" translatable="false">Tue</string>
+    <string name="wed" translatable="false">Wed</string>
+    <string name="thu" translatable="false">Thu</string>
+    <string name="fri" translatable="false">Fri</string>
+    <string name="sat" translatable="false">Sat</string>
+
+</resources>
