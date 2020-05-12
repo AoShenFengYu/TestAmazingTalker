@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
 import java.util.*
 
-object DatetimeUtil {
+object DateUtil {
     private const val FORMAT_ISO_8601 = "yyyy-MM-dd'T'HH:mm:ss'Z'"
     private const val FORMAT_DATE = "yyyy-MM-dd"
     private const val FORMAT_TIME = "HH:mm"

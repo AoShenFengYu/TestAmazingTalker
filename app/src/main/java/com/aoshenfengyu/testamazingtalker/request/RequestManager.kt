@@ -18,13 +18,14 @@ class RequestManager private constructor(context: Context) {
         const val CONNECT_TIMEOUT: Long = 15 * 1000
         const val WRITE_TIMEOUT: Long = 15 * 1000
         const val READ_TIMEOUT: Long = 15 * 1000
-
         const val BASE_URL = "https://api.amazingtalker.com/"
+
+        var USE_MOCK = false
 
         private var instance: RequestManager? = null
         private var staticContext: Context? = null
 
-        fun init(c: Context) {
+        fun init(c: Context?) {
             staticContext = c
         }
 
@@ -46,6 +47,10 @@ class RequestManager private constructor(context: Context) {
             .readTimeout(READ_TIMEOUT, TimeUnit.SECONDS)
 
         okHttpClientBuilder.addInterceptor(RequestInterceptor(context))
+
+        if (USE_MOCK) {
+            okHttpClientBuilder.addInterceptor(MockResponseInterceptor(context))
+        }
 
         val okHttpClient = okHttpClientBuilder.build()
         val gson = GsonBuilder().setLenient().create()

@@ -11,11 +11,11 @@ abstract class BaseFragment<V, T : BasePresenter<V>> : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter = onCreatePresenter()
-        presenter?.bind(this@BaseFragment as V)
+        presenter?.attachView(this@BaseFragment as V)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter?.unbind()
+        presenter?.detachView()
     }
 }

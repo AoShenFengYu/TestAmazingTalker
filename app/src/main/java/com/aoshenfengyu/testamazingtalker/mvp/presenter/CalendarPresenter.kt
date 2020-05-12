@@ -2,13 +2,16 @@ package com.aoshenfengyu.testamazingtalker.mvp.presenter
 
 import com.aoshenfengyu.testamazingtalker.base.BasePresenter
 import com.aoshenfengyu.testamazingtalker.bean.ScheduleBundle
-import com.aoshenfengyu.testamazingtalker.mvp.model.CalendarModel
 import com.aoshenfengyu.testamazingtalker.mvp.contract.CalendarContract
+import org.jetbrains.annotations.TestOnly
 
-class CalendarPresenter : BasePresenter<CalendarContract.View>(), CalendarContract.Callback {
+open class CalendarPresenter(private val model: CalendarContract.Model) :
+    BasePresenter<CalendarContract.View>(), CalendarContract.Callback {
 
-    private val model: CalendarContract.Model =
-        CalendarModel()
+    @TestOnly
+    constructor(view: CalendarContract.View, model: CalendarContract.Model) : this(model) {
+        attachView(view)
+    }
 
     fun getSchedule(iso8601SundayString: String) {
         model.getSchedule(iso8601SundayString, this)

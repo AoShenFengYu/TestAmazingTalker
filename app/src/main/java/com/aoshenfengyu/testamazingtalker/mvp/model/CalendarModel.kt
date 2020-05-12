@@ -12,7 +12,7 @@ import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
 
-class CalendarModel : CalendarContract.Model {
+open class CalendarModel : CalendarContract.Model {
 
     override fun getSchedule(
         iso8601SundayString: String,
@@ -34,7 +34,8 @@ class CalendarModel : CalendarContract.Model {
                 ) {
                     val timeRanges = sortTimeRanges(response.body())
                     val scheduleBundleFactory = ScheduleItemsFactory()
-                    val scheduleBundle = scheduleBundleFactory.create(iso8601SundayString, timeRanges)
+                    val scheduleBundle =
+                        scheduleBundleFactory.create(iso8601SundayString, timeRanges)
                     callback.onGetScheduleSuccess(scheduleBundle)
                 }
             })

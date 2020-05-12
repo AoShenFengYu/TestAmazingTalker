@@ -7,15 +7,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
-import com.aoshenfengyu.testamazingtalker.constant.Constant.CALENDAR_COLUMN_COUNT
 import com.aoshenfengyu.testamazingtalker.R
 import com.aoshenfengyu.testamazingtalker.adapter.ScheduleAdapter
 import com.aoshenfengyu.testamazingtalker.base.BaseFragment
 import com.aoshenfengyu.testamazingtalker.bean.ScheduleBundle
 import com.aoshenfengyu.testamazingtalker.bean.ScheduleItem
-import com.aoshenfengyu.testamazingtalker.mvp.presenter.CalendarPresenter
+import com.aoshenfengyu.testamazingtalker.constant.Constant.CALENDAR_COLUMN_COUNT
 import com.aoshenfengyu.testamazingtalker.mvp.contract.CalendarContract
-import com.aoshenfengyu.testamazingtalker.util.DatetimeUtil
+import com.aoshenfengyu.testamazingtalker.mvp.model.CalendarModel
+import com.aoshenfengyu.testamazingtalker.mvp.presenter.CalendarPresenter
+import com.aoshenfengyu.testamazingtalker.util.DateUtil
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -29,7 +30,7 @@ class CalendarFragment(private val startDateCalendar: Calendar) :
     private var tvDayTexts = ArrayList<TextView>()
 
     override fun onCreatePresenter(): CalendarPresenter {
-        return CalendarPresenter()
+        return CalendarPresenter(CalendarModel())
     }
 
     override fun onCreateView(
@@ -97,7 +98,7 @@ class CalendarFragment(private val startDateCalendar: Calendar) :
 
     private fun getSchedule() {
         presenter?.getSchedule(
-            DatetimeUtil.getIso8601DateString(startDateCalendar)
+            DateUtil.getIso8601DateString(startDateCalendar)
         )
     }
 

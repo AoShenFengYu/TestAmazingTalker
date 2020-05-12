@@ -1,11 +1,11 @@
 package com.aoshenfengyu.testamazingtalker.factory
 
-import com.aoshenfengyu.testamazingtalker.constant.Constant.CALENDAR_COLUMN_COUNT
-import com.aoshenfengyu.testamazingtalker.constant.Constant.CALENDAR_TIME_INTERVAL_MINUTE
 import com.aoshenfengyu.testamazingtalker.bean.ScheduleBean
 import com.aoshenfengyu.testamazingtalker.bean.ScheduleBundle
 import com.aoshenfengyu.testamazingtalker.bean.ScheduleItem
-import com.aoshenfengyu.testamazingtalker.util.DatetimeUtil
+import com.aoshenfengyu.testamazingtalker.constant.Constant.CALENDAR_COLUMN_COUNT
+import com.aoshenfengyu.testamazingtalker.constant.Constant.CALENDAR_TIME_INTERVAL_MINUTE
+import com.aoshenfengyu.testamazingtalker.util.DateUtil
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -34,14 +34,14 @@ class ScheduleItemsFactory {
         val twoDimensionalScheduleItems = TwoDimensionalScheduleItems()
         if (dateRanges.size == 0) return twoDimensionalScheduleItems
 
-        val sunday = DatetimeUtil.getDate(iso8601SundayString)
-        val lastDayOfWeek = DatetimeUtil.getLastDayOfWeek(sunday)
+        val sunday = DateUtil.getDate(iso8601SundayString)
+        val lastDayOfWeek = DateUtil.getLastDayOfWeek(sunday)
 
         startDay(sunday)
 
         for (dateRange in dateRanges) {
-            val startDate = DatetimeUtil.getDate(dateRange.iso8601StartDateString!!)
-            val endDate = DatetimeUtil.getDate(dateRange.iso8601EndDateString!!)
+            val startDate = DateUtil.getDate(dateRange.iso8601StartDateString!!)
+            val endDate = DateUtil.getDate(dateRange.iso8601EndDateString!!)
             val scheduleItems =
                 createScheduleItems(startDate, endDate, dateRange.isEnable, lastDayOfWeek)
             groupScheduleItems(twoDimensionalScheduleItems, scheduleItems)
@@ -98,15 +98,15 @@ class ScheduleItemsFactory {
 
     private fun createScheduleItem(date: Date, isEnable: Boolean): ScheduleItem {
         return ScheduleItem(
-            DatetimeUtil.getDateString(date),
-            DatetimeUtil.getTimeString(date),
+            DateUtil.getDateString(date),
+            DateUtil.getTimeString(date),
             isEnable
         )
     }
 
     private fun startDay(sunday: Date) {
         today = sunday
-        todayString = DatetimeUtil.getDateString(today)
+        todayString = DateUtil.getDateString(today)
         todayItems = ArrayList<ScheduleItem>()
     }
 
@@ -119,8 +119,8 @@ class ScheduleItemsFactory {
             return true
         }
 
-        today = DatetimeUtil.getTomorrowDate(today)
-        todayString = DatetimeUtil.getDateString(today)
+        today = DateUtil.getTomorrowDate(today)
+        todayString = DateUtil.getDateString(today)
         todayItems = ArrayList<ScheduleItem>()
         return false
     }
