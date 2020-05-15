@@ -1,14 +1,14 @@
 package com.aoshenfengyu.testamazingtalker.base
 
-abstract class BasePresenter<V> {
-    protected var view: V? = null
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 
-    fun attachView(view: V?) {
-        this.view = view
-    }
 
-    fun detachView() {
-        this.view = null
+abstract class BasePresenter<V>() {
+
+    val disposables = CompositeDisposable()
+
+    fun unsubscribe() {
+        disposables.dispose()
     }
 
 }

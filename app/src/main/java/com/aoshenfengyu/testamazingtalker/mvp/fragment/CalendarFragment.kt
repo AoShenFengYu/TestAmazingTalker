@@ -16,6 +16,8 @@ import com.aoshenfengyu.testamazingtalker.constant.Constant.CALENDAR_COLUMN_COUN
 import com.aoshenfengyu.testamazingtalker.mvp.contract.CalendarContract
 import com.aoshenfengyu.testamazingtalker.mvp.model.CalendarModel
 import com.aoshenfengyu.testamazingtalker.mvp.presenter.CalendarPresenter
+import com.aoshenfengyu.testamazingtalker.request.CalendarApi
+import com.aoshenfengyu.testamazingtalker.request.RequestManager
 import com.aoshenfengyu.testamazingtalker.util.DateUtil
 import kotlinx.android.synthetic.main.fragment_calendar.*
 import java.util.*
@@ -30,7 +32,12 @@ class CalendarFragment(private val startDateCalendar: Calendar) :
     private var tvDayTexts = ArrayList<TextView>()
 
     override fun onCreatePresenter(): CalendarPresenter {
-        return CalendarPresenter(CalendarModel())
+        val api = RequestManager
+            .getInstance()
+            .retrofit
+            .create(CalendarApi::class.java)
+        val model = CalendarModel(api)
+        return CalendarPresenter(this, model)
     }
 
     override fun onCreateView(
@@ -97,7 +104,7 @@ class CalendarFragment(private val startDateCalendar: Calendar) :
     }
 
     private fun getSchedule() {
-        presenter?.getSchedule(
+        presenter?.loadSchedule(
             DateUtil.getIso8601DateString(startDateCalendar)
         )
     }

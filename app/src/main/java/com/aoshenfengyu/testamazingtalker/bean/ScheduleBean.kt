@@ -17,6 +17,10 @@ class ScheduleBean {
         var iso8601EndDateString: String? = null
 
         var isEnable: Boolean = false
+
+        fun isEmpty(): Boolean {
+            return iso8601StartDateString == null || iso8601EndDateString == null
+        }
     }
 
     class AvailableBean : DateRangeBean() {

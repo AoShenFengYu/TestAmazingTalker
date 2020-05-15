@@ -1,9 +1,9 @@
 package com.aoshenfengyu.testamazingtalker.base
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 import com.aoshenfengyu.testamazingtalker.request.RequestManager
 
-class BaseApplication : Application() {
+class BaseApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()

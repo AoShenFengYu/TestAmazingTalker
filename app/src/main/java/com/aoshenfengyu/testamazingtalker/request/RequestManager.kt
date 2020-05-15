@@ -2,9 +2,9 @@ package com.aoshenfengyu.testamazingtalker.request
 
 import android.content.Context
 import com.google.gson.GsonBuilder
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 import java.util.concurrent.TimeUnit
@@ -59,7 +59,7 @@ class RequestManager private constructor(context: Context) {
             .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .build()
 
     }

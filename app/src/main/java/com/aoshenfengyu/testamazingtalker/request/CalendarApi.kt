@@ -1,7 +1,7 @@
 package com.aoshenfengyu.testamazingtalker.request
 
 import com.aoshenfengyu.testamazingtalker.bean.ScheduleBean
-import retrofit2.Call
+import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -15,6 +15,6 @@ interface CalendarApi {
     fun getSchedule(
         @Path("user_name") userName: String,
         @Query("started_at") iso8601DateString: String
-    ): Call<ScheduleBean>
+    ): Observable<ScheduleBean>
 
 }

@@ -1,6 +1,8 @@
 package com.aoshenfengyu.testamazingtalker.mvp.contract
 
+import com.aoshenfengyu.testamazingtalker.bean.ScheduleBean
 import com.aoshenfengyu.testamazingtalker.bean.ScheduleBundle
+import io.reactivex.rxjava3.core.Observable
 
 class CalendarContract {
 
@@ -9,10 +11,9 @@ class CalendarContract {
     }
 
     interface Model {
-        fun getSchedule(
-            iso8601SundayString: String,
-            callback: Callback
-        )
+        fun requestSchedule(
+            iso8601SundayString: String
+        ): Observable<ScheduleBean>
     }
 
     interface Callback {

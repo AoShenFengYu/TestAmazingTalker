@@ -11,11 +11,10 @@ abstract class BaseActivity<V, T : BasePresenter<V>> : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         presenter = onCreatePresenter()
-        presenter?.attachView(this@BaseActivity as V)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter?.detachView()
+        presenter?.unsubscribe()
     }
 }
